@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!empty($_GET['save'])) {
         print('Thanks, the result is saved.');
     }
-    include('form.html');
+    include('form.php');
     exit();
 }
 
