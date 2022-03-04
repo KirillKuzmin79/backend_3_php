@@ -7,7 +7,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!empty($_GET['save'])) {
-        print('Thanks, the result is saved.');
+        print('Спасибо, форма сохранена.');
     }
     include('form.html');
     exit();
@@ -15,22 +15,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 $errors = FALSE;
 if (empty($_POST['fio'])) {
-    print('Write name.<br/>');
+    print('Напишите ФИО.<br/>');
     $errors = TRUE;
 }
 
 if (empty($_POST['mail'])) {
-    print('Write e-mail.<br/>');
+    print('Напишите почту.<br/>');
     $errors = TRUE;
 }
 
 if (empty($_POST['date'])) {
-    print('Write birthday.<br/>');
+    print('Напишите свой день рождения.<br/>');
     $errors = TRUE;
 }
 
 if ( empty($_POST['sex']) ) {
-    print('Check sex.<br/>');
+    print('Укажите пол.<br/>');
     $errors = TRUE;
 }
 
@@ -46,46 +46,46 @@ switch($_POST['sex']) {
 };
 
 
-if (empty($_POST['Konechnosti'])) {
-    print('Check your amount of konechnostei.<br/>');
+if (empty($_POST['limbs'])) {
+    print('Укажите количество конечностей.<br/>');
     $errors = TRUE;
 }
 
-switch($_POST['Konechnosti']) {
+switch($_POST['limbs']) {
     case '1': {
-        $konechnosti='1';
+        $limbs='1';
         break;
     }
     case '2':{
-        $konechnosti='2';
+        $limbs='2';
         break;
     }
     case '3':{
-        $konechnosti='3';
+        $limbs='3';
         break;
     }
     case '4':{
-        $konechnosti='4';
+        $limbs='4';
         break;
     }
 };
 
 if (empty($_POST['Superpowers'])) {
-    print('Check superpowers.<br/>');
+    print('Укажите хоть одну суперспособность.<br/>');
     $errors = TRUE;
 }
 
 $power1=in_array('bessm',$_POST['Superpowers']) ? '1' : '0';
-$power2=in_array('prohojd',$_POST['Superpowers']) ? '1' : '0';
+$power2=in_array('passing',$_POST['Superpowers']) ? '1' : '0';
 $power3=in_array('fly',$_POST['Superpowers']) ? '1' : '0';
 
-if (empty($_POST['bio'])) {
-    print('Write your bio.<br/>');
+if (empty($_POST['biography'])) {
+    print('Напишите кратко биографию.<br/>');
     $errors = TRUE;
 }
 
 if (empty($_POST['agree'])) {
-    print('Agree!<br/>');
+    print('Вы не согласились с условиями контракта!<br/>');
     $errors = TRUE;
 }
 $agree = 'agree';
@@ -99,8 +99,8 @@ $pass = '7833721';
 $db = new PDO('mysql:host=localhost;dbname=u47531', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
 
 try {
-    $stmt = $db->prepare("INSERT INTO application SET fio = ?, mail = ?, date = ? ,sex = ?, konechnosti = ?, bessm = ?, prohojd = ? ,fly =?, bio = ?, agree = ?");
-    $stmt -> execute(array($_POST['fio'],$_POST['mail'],$_POST['date'],$sex,$konechnosti,$power1,$power2,$power3,$_POST['bio'], $agree));
+    $stmt = $db->prepare("INSERT INTO application SET fio = ?, mail = ?, date = ? ,sex = ?, limbs = ?, bessm = ?, passing = ? ,fly =?, biography = ?, agree = ?");
+    $stmt -> execute(array($_POST['fio'],$_POST['mail'],$_POST['date'],$sex,$limbs,$power1,$power2,$power3,$_POST['biography'], $agree));
 }
 catch(PDOException $e){
     print('Error : ' . $e->getMessage());
