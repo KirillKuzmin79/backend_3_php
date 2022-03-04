@@ -5,7 +5,7 @@
 <body>
     <main>
    		<h3>Form</h3><br>
-        <form action="" method="POST" class="row mx-5 my-2 gy-1">
+        <form action="" method="POST">
             <p>Input your full name</p>
             <label><input name="fio" type="text" placeholder="FIO"/></label><br>
             <p>Input your e-mail</p>
